@@ -13,6 +13,7 @@ class CheckpointView extends Ui.DataField {
 	var delta;
 	var nextCpRemain;
 	var nextCpName;
+	var nextCpId;
 	var mLabelX;
 	var mLabelY;
 	var mCutoffX;
@@ -56,7 +57,8 @@ class CheckpointView extends Ui.DataField {
         	var dist = (info.elapsedDistance - legstart) / 1609.34;
         	nextCpRemain = nextCp.dist - dist;   
         	
-			/* use in name view */        	
+			/* use in name view */   
+			nextCpId = nextCp.id;     	
         	nextCpName = nextCp.name;
         	
         	timeToCutoff = nextCp.timeToCutoff(info.elapsedTime);
@@ -100,7 +102,14 @@ class CheckpointView extends Ui.DataField {
         dc.setColor(fgColor, bgColor);
         dc.clear();
         dc.setColor(fgColor, Gfx.COLOR_TRANSPARENT);
+
         
+        var cpIdStr = "CP";
+        if (nextCpId != null) {
+        	cpIdStr = nextCpId;
+        }
+        dc.drawText( mLabelX, 0, labelFont, cpIdStr, Gfx.TEXT_JUSTIFY_CENTER );
+                
         var cpStr = "Checkpoint";
         if (nextCpName != null) {
         	cpStr = nextCpName;
