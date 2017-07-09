@@ -28,7 +28,7 @@ class CheckpointView extends Ui.DataField {
         checkpoints = new CPList();
         cpidx = 0;
         legstart = 0.0;
-        delta = 200;        
+        delta = 150;        
     }
     
     function compute(info) {
@@ -119,8 +119,8 @@ class CheckpointView extends Ui.DataField {
         var cutoffStr = "--:--";
         if (timeToCutoff != null) {
         	cutoffStr = formatTimeHM(timeToCutoff);
-        	// compute pace required but only if +ve distance to go
-        	if ((nextCpRemain != null) && (nextCpRemain > 0.1)) {
+        	// compute pace required but only if +ve distance and time to go
+        	if ((nextCpRemain != null) && (nextCpRemain > 0.1) && (timeToCutoff > 0.0)) {
         		cutoffStr = cutoffStr + " (" + formatTimeMS(timeToCutoff / nextCpRemain) + "/mi)";
         	}
         }
