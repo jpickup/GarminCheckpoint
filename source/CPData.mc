@@ -7,7 +7,7 @@ class CPData
 	var rlat;
 	var rlon;
 	var cosrlat;
-	var dist;
+	var dist;			// Distance from previous checkpoint to this one
 	var cutoff;	
 
 	const DMMEANRADIUS = 6371000.0;  
@@ -36,6 +36,7 @@ class CPData
 	{
 		var latdiff = (rlat - other_rlat).abs() * DMMEANRADIUS;
 		var londiff = (rlon - other_rlon).abs() * DMMEANRADIUS * cosrlat;
+//		System.println(id + ": LatDiff: " + latdiff + "   / LonDiff: " + londiff);
 		return (latdiff < delta) && (londiff < delta);		
 	}
 	
