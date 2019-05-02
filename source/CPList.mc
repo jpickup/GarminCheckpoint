@@ -4,37 +4,40 @@ class CPList
 	function initialize() 
 	{
 			cps = new[15];
+			
+/** 10 Paeks **
+cps[0] = new CPData("CP1","Helvellyn",54.526851,-3.0175523,2.2,2.08836206896552);
+cps[1] = new CPData("AS1","Steel End",54.506232,-3.0482365,2.9,3);
+cps[2] = new CPData("CP2","Bowfell",54.44781,-3.1663108,7.86,6.39774557165861);
+cps[3] = new CPData("CP3","Great End",54.465563,-3.1964392,2.09,7.29951690821256);
+cps[4] = new CPData("CP4","Scafell Pike",54.454171,-3.2113311,1.2,8);
+cps[5] = new CPData("CP5","Scafell",54.447465,-3.2247663,1.05,8.39817166074149);
+cps[6] = new CPData("CP6","Pillar",54.497436,-3.2811687,5.73,12.1767394616557);
+cps[7] = new CPData("CP7","Great Gable",54.48214,-3.2193815,2.97,14.0782122905028);
+cps[8] = new CPData("CP8","Green Gable",54.485722,-3.2135759,0.370000000000001,14.3463687150838);
+cps[9] = new CPData("AS2","Honister Pass",54.511451,-3.1984444,2.44,16);
+cps[10] = new CPData("CP9","High Spy",54.535399,-3.1851901,1.94,16.9527595884004);
+cps[11] = new CPData("AS3","Nichol End",54.5951,-3.1557357,4.85,19.5);
+cps[12] = new CPData("CP10","Skiddaw",54.651391,-3.147739,4.92,21.8162197514716);
+cps[13] = new CPData("END","Keswick",54.605368,-3.1371545,5.27999999999999,24);
+**/			
+/** LAKELAND100 **/			
 cps[0] = new CPData("CP1","Seathwaite",54.354578,-3.1878105,7,2.5);
-cps[1] = new CPData("CP2","Eskdale",54.398673,-3.270725,7,4.7);
-cps[2] = new CPData("CP3","Wasdale Head",54.468033,-3.2559011,5.4,6.3);
-cps[3] = new CPData("CP4","Buttermere",54.541513,-3.2767065,6.9,9.3);
-cps[4] = new CPData("CP5","Braithwaite",54.60261,-3.1903775,6.5,11.9);
-cps[5] = new CPData("CP6","Blencathra",54.620699,-3.0824933,8.5,14.9);
-cps[6] = new CPData("CP7","Dockray",54.588472,-2.960933,7.7,18.1);
-cps[7] = new CPData("CP8","Dalemain",54.63451,-2.8101936,10.1,21.7666666666667);
-cps[8] = new CPData("CP9","Howtown",54.56854,-2.8630197,7.1,24.2);
-cps[9] = new CPData("CP10","Mardale",54.488845,-2.8212033,9.39999999999999,28.2);
-cps[10] = new CPData("CP11","Kentmere",54.429399,-2.8400529,6.5,31);
-cps[11] = new CPData("CP12","Ambleside",54.431013,-2.9656758,7.30000000000001,33.6);
+cps[1] = new CPData("CP2","Boot",54.399073,-3.2702445,7,4.7);
+cps[2] = new CPData("CP3","Wasdale Head",54.468286,-3.2566186,5.4,6.3);
+cps[3] = new CPData("CP4","Buttermere",54.541392,-3.2762545,6.9,9.3);
+cps[4] = new CPData("CP5","Braithwaite",54.602542,-3.19084,6.5,11.9);
+cps[5] = new CPData("CP6","Blencathra",54.621133,-3.0821487,8.5,14.9);
+cps[6] = new CPData("CP7","Dockray",54.588725,-2.9607842,7.7,18.1);
+cps[7] = new CPData("CP8","Dalemain",54.634692,-2.8098874,10.1,21.7666666666667);
+cps[8] = new CPData("CP9","Howtown",54.568633,-2.8625422,7.1,24.2);
+cps[9] = new CPData("CP10","Mardale",54.489027,-2.8208519,9.39999999999999,28.2);
+cps[10] = new CPData("CP11","Kentmere",54.429311,-2.8398045,6.5,31);
+cps[11] = new CPData("CP12","Ambleside",54.430994,-2.9657524,7.30000000000001,33.6);
 cps[12] = new CPData("CP13","Chapel Stile",54.442042,-3.0608132,5.59999999999999,35.5);
-cps[13] = new CPData("CP14","Tilberthwaite",54.399715,-3.0705032,6.5,37.8);
-cps[14] = new CPData("CP15","Coniston",54.367507,-3.0741596,3.5,40);
+cps[13] = new CPData("CP14","Tilberthwaite",54.399996,-3.0702179,6.5,37.8);
+cps[14] = new CPData("END","Coniston",54.367497,-3.0742978,3.5,40);
 
-
-/** TEST 
-cps = new[11];
-cps[0] = new CPData("CP1","Mickleham",51.272811,-0.30078382,1.4,0.264150943396226);
-cps[1] = new CPData("CP2","Druids",51.26803,-0.34175711,2.35,0.707547169811321);
-cps[2] = new CPData("CP3","Crabtree",51.25933,-0.3415112,0.75,0.849056603773585);
-cps[3] = new CPData("CP4","Ranmore",51.241415,-0.36888885,2.1,1.24528301886792);
-cps[4] = new CPData("CP5","Westcott",51.22543,-0.36464195,1.26,1.48301886792453);
-cps[5] = new CPData("CP6","Dukes",51.189537,-0.36317944,2.84,2.0188679245283);
-cps[6] = new CPData("CP7","Skip Leith",51.176526,-0.3710223,0.5,2.11320754716981);
-cps[7] = new CPData("CP8","Holmwood",51.200706,-0.32880248,1.4,2.37735849056604);
-cps[8] = new CPData("CP9","Brockham",51.232322,-0.29499919,4.15,3.16037735849057);
-cps[9] = new CPData("CP10","Box Hill",51.251499,-0.28418755,2.75,3.67924528301887);
-cps[10] = new CPData("CP11","Headley",51.270324,-0.27402495,1.7,4);
-**/
 	}
 	
 	function get(idx)
@@ -48,6 +51,10 @@ cps[10] = new CPData("CP11","Headley",51.270324,-0.27402495,1.7,4);
 		}
 		
 		return cps[idx];
+	}
+	
+	function size() {
+		return cps.size();
 	}
 }
 

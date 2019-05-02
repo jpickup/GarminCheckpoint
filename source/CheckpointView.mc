@@ -22,13 +22,22 @@ class CheckpointView extends Ui.DataField {
 	var labelFont;
 	var distanceFont;
 	var timeToCutoff;
+	var lastDelta;
+	var vibrateData;
+	var finished;
 
     function initialize() {
         DataField.initialize();
         checkpoints = new CPList();
         cpidx = 0;
         legstart = 0.0;
-        delta = 150;        
+        delta = 200;       
+        finished = 0;
+    	vibrateData = [
+        	new Attention.VibeProfile(  50, 100 ),
+            new Attention.VibeProfile( 100, 100 ),
+            new Attention.VibeProfile(  50, 100 ),
+            ];
     }
     
     function compute(info) {
@@ -40,29 +49,50 @@ class CheckpointView extends Ui.DataField {
         	var rlon = locRad[1];
         	var nextCp = checkpoints.get(cpidx);
         	var nextButOneCp = checkpoints.get(cpidx+1);
-        	
+	
         	if (nextCp.isNearerThan(rlat, rlon, delta)) {
-     			legstart = info.elapsedDistance;
+     			legstart = info.elapsedDistance + delta;	// add delta as worst-case we've snapped to CP that much before
         		cpidx = cpidx + 1;
         		nextCp = checkpoints.get(cpidx);
+        		notifyCheckpointReached(nextCpName);
         	}
         	// skip at most one CP
         	else if (nextButOneCp.isNearerThan(rlat, rlon, delta)) {
-       			legstart = info.elapsedDistance;
+       			legstart = info.elapsedDistance + delta;
         		cpidx = cpidx + 2;
         		nextCp = checkpoints.get(cpidx);
+        		notifyCheckpointReached(nextCpName);
         	}
-        	
+	        	
         	/* Use in distance view */
+//        	System.println("Elapsed: " + info.elapsedDistance);
         	var dist = (info.elapsedDistance - legstart) / 1609.34;
+//        	System.println("Dist: " + dist);
         	nextCpRemain = nextCp.dist - dist;   
-        	
-			/* use in name view */   
+//        	System.println("Remain: " + nextCpRemain);
+        	if (cpidx >= checkpoints.size()) {
+        		nextCpRemain = null;	
+        		finished = 1;
+        	}
+	        	
 			nextCpId = nextCp.id;     	
         	nextCpName = nextCp.name;
-        	
+	        	
         	timeToCutoff = nextCp.timeToCutoff(info.elapsedTime);
+ 
         }
+    }
+    
+    function notifyCheckpointReached(name) {
+    	if (finished == 0) {
+    		if (Attention has :playTone) {
+    			Attention.playTone(7);
+    		}
+//    		if (Attention has :vibrate) {
+//            	Attention.vibrate(vibrateData);
+//        	}    
+    		WatchUi.requestUpdate();
+    	}
     }
     
     function onLayout(dc) {
