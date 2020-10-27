@@ -25,9 +25,21 @@ class CPData
 	}
 	
 	
-	function deg2rad(deg) {
+	function deg2rad(deg) 
+	{
 		return deg * D2R;
 	}
+	
+	/**
+	 * Return the distance, in metres, that the input coordinates are from the checkpoint
+	**/
+	function haversineDist(other_rlat, other_rlon)  
+ 	{  
+		var hs1 = rlat - other_rlat;  
+		var hs2 = rlon - other_rlon;
+		var c2 = Math.cos((rlat + other_rlat)/2.0); 
+  		return DMMEANRADIUS * Math.sqrt(hs1*hs1+c2*c2*hs2*hs2);  
+ 	}  
 	
 	/**
 	 * return true if the provided position (in degrees) is within a bounding box of delta metres from the checkpoint location

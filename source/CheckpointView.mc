@@ -25,6 +25,8 @@ class CheckpointView extends Ui.DataField {
 	var lastDelta;
 	var vibrateData;
 	var finished;
+	var tick;
+	var distCorrection;
 
     function initialize() {
         DataField.initialize();
@@ -33,6 +35,8 @@ class CheckpointView extends Ui.DataField {
         legstart = 0.0;
         delta = 200;       
         finished = 0;
+        tick = 0;
+        distCorrection = 0;
     	vibrateData = [
         	new Attention.VibeProfile(  50, 100 ),
             new Attention.VibeProfile( 100, 100 ),
@@ -54,6 +58,7 @@ class CheckpointView extends Ui.DataField {
      			legstart = info.elapsedDistance + delta;	// add delta as worst-case we've snapped to CP that much before
         		cpidx = cpidx + 1;
         		nextCp = checkpoints.get(cpidx);
+        		distCorrection = 0;
         		notifyCheckpointReached(nextCpName);
         	}
         	// skip at most one CP
@@ -61,14 +66,34 @@ class CheckpointView extends Ui.DataField {
        			legstart = info.elapsedDistance + delta;
         		cpidx = cpidx + 2;
         		nextCp = checkpoints.get(cpidx);
+        		distCorrection = 0;
         		notifyCheckpointReached(nextCpName);
         	}
 	        	
         	/* Use in distance view */
 //        	System.println("Elapsed: " + info.elapsedDistance);
-        	var dist = (info.elapsedDistance - legstart) / 1609.34;
+        	var legDistMetres = (info.elapsedDistance - legstart);
+        	var remainDistMetres = nextCp.dist * 1609.34 - legDistMetres;
+        	
+        	// every 60 cycles do a more expensive distance check 
+        	tick = tick + 1;
+        	if (tick % 60 == 0) {
+        		//System.println("min check");
+        		tick = 0;
+        		var minDist = nextCp.haversineDist(rlat, rlon);
+        		if (remainDistMetres < minDist) {
+        			//System.println("apply correction");
+        		
+        			// we think we are closer than the minimum distance so add an offset to what we display
+        			distCorrection = minDist - remainDistMetres;
+        			//System.println("correction = " + distCorrection);
+        		}
+        	}
+
 //        	System.println("Dist: " + dist);
+        	var dist = (legDistMetres - distCorrection) / 1609.34;
         	nextCpRemain = nextCp.dist - dist;   
+        	        	
 //        	System.println("Remain: " + nextCpRemain);
         	if (cpidx >= checkpoints.size()) {
         		nextCpRemain = null;	
