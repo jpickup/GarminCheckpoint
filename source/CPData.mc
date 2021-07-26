@@ -7,7 +7,7 @@ class CPData
 	var rlat;
 	var rlon;
 	var cosrlat;
-	var dist;			// Distance from previous checkpoint to this one
+	var dist;			// Distance from previous checkpoint to this one. NOTE: Now in metres
 	var cutoff;	
 
 	const DMMEANRADIUS = 6371000.0;  
