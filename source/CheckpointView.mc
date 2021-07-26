@@ -11,7 +11,7 @@ class CheckpointView extends Ui.DataField {
 	var legstart;
 	var checkpoints;
 	var delta;
-	var nextCpRemain;
+	var nextCpRemainMetres;
 	var nextCpName;
 	var nextCpId;
 	var mLabelX;
@@ -71,9 +71,9 @@ class CheckpointView extends Ui.DataField {
         	}
 	        	
         	/* Use in distance view */
-//        	System.println("Elapsed: " + info.elapsedDistance);
+//System.println("Elapsed: " + info.elapsedDistance);
         	var legDistMetres = (info.elapsedDistance - legstart);
-        	var remainDistMetres = nextCp.dist * 1609.34 - legDistMetres;
+        	var remainDistMetres = nextCp.dist - legDistMetres;
         	
         	// every 60 cycles do a more expensive distance check 
         	tick = tick + 1;
@@ -86,17 +86,16 @@ class CheckpointView extends Ui.DataField {
         		
         			// we think we are closer than the minimum distance so add an offset to what we display
         			distCorrection = minDist - remainDistMetres;
-        			//System.println("correction = " + distCorrection);
+// System.println("correction = " + distCorrection);
         		}
         	}
 
-//        	System.println("Dist: " + dist);
-        	var dist = (legDistMetres - distCorrection) / 1609.34;
-        	nextCpRemain = nextCp.dist - dist;   
-        	        	
-//        	System.println("Remain: " + nextCpRemain);
+        	//System.println("Dist: " + dist);
+        	var dist = (legDistMetres - distCorrection);   
+        	nextCpRemainMetres = nextCp.dist - dist;   
+
         	if (cpidx >= checkpoints.size()) {
-        		nextCpRemain = null;	
+        		nextCpRemainMetres = null;	
         		finished = 1;
         	}
 	        	
@@ -113,9 +112,6 @@ class CheckpointView extends Ui.DataField {
     		if (Attention has :playTone) {
     			Attention.playTone(7);
     		}
-//    		if (Attention has :vibrate) {
-//            	Attention.vibrate(vibrateData);
-//        	}    
     		WatchUi.requestUpdate();
     	}
     }
@@ -175,15 +171,29 @@ class CheckpointView extends Ui.DataField {
         if (timeToCutoff != null) {
         	cutoffStr = formatTimeHM(timeToCutoff);
         	// compute pace required but only if +ve distance and time to go
-        	if ((nextCpRemain != null) && (nextCpRemain > 0.1) && (timeToCutoff > 0.0)) {
-        		cutoffStr = cutoffStr + " (" + formatTimeMS(timeToCutoff / nextCpRemain) + "/mi)";
+        	if ((nextCpRemainMetres != null) && (nextCpRemainMetres > 100) && (timeToCutoff > 0.0)) {
+	        	if (System.getDeviceSettings().distanceUnits == System.UNIT_METRIC) {
+	        		cutoffStr = cutoffStr + " (" + formatTimeMS(timeToCutoff / (nextCpRemainMetres / 1000.0)) + "/km)";
+	        	}
+	            else {
+	        		cutoffStr = cutoffStr + " (" + formatTimeMS(timeToCutoff / (nextCpRemainMetres / 1609.34)) + "/mi)";
+	            }
         	}
         }
         dc.drawText( mCutoffX, mCutoffY, labelFont, cutoffStr, Gfx.TEXT_JUSTIFY_CENTER );
         
 		var distanceStr = "--.-";
-        if (nextCpRemain != null) {
-        	distanceStr = nextCpRemain.format("%.1f");
+        if (nextCpRemainMetres != null) {
+       
+            if (System.getDeviceSettings().distanceUnits == System.UNIT_METRIC) {
+            	var remain = nextCpRemainMetres / 1000.0;     // km
+            	distanceStr = remain.format("%.1f");
+            }
+            else {
+            	var remain = nextCpRemainMetres / 1609.34;  // miles
+            	distanceStr = remain.format("%.1f");
+            }
+        	
         }
         dc.drawText( mLabelX, mDistanceY, distanceFont, distanceStr, Gfx.TEXT_JUSTIFY_CENTER );
             	

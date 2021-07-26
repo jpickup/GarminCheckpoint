@@ -3,9 +3,9 @@ class CPList
 	var cps;
 	function initialize() 
 	{
-			cps = new[18];
+			cps = new[14];
 			
-/** 10 Peaks **
+/** 10 Peaks ** (not in metres, won't work)
 cps[0] = new CPData("CP1","Helvellyn",54.526851,-3.0175523,2.2,2.08836206896552);
 cps[1] = new CPData("AS1","Steel End",54.506232,-3.0482365,2.9,3);
 cps[2] = new CPData("CP2","Bowfell",54.44781,-3.1663108,7.86,6.39774557165861);
@@ -21,7 +21,7 @@ cps[11] = new CPData("AS3","Nichol End",54.5951,-3.1557357,4.85,19.5);
 cps[12] = new CPData("CP10","Skiddaw",54.651391,-3.147739,4.92,21.8162197514716);
 cps[13] = new CPData("END","Keswick",54.605368,-3.1371545,5.27999999999999,24);
 **/			
-/** LAKELAND100 **			
+/** LAKELAND100 **	(not in metres, won't work)		
 cps[0] = new CPData("CP1","Seathwaite",54.354578,-3.1878105,7,2.5);
 cps[1] = new CPData("CP2","Boot",54.399073,-3.2702445,7,4.7);
 cps[2] = new CPData("CP3","Wasdale Head",54.468286,-3.2566186,5.4,6.3);
@@ -38,25 +38,21 @@ cps[12] = new CPData("CP13","Chapel Stile",54.442042,-3.0608132,5.59999999999999
 cps[13] = new CPData("CP14","Tilberthwaite",54.399996,-3.0702179,6.5,37.8);
 cps[14] = new CPData("END","Coniston",54.367497,-3.0742978,3.5,40);
 */
-/** Welsh3000s **/
-cps[0] = new CPData("CP1","Snowdon",53.068149,-4.0767453,4,1.34303301622832);
-cps[1] = new CPData("CP2","Carnedd Ugain",53.075736,-4.0747219,0.65,1.56127588136542);
-cps[2] = new CPData("CP3","Crib Goch",53.075736,-4.0747219,0.899999999999999,1.86345831001679);
-cps[3] = new CPData("CP4","Elldir Fawr",53.130641,-4.0763206,5.15,3.59261331841074);
-cps[4] = new CPData("CP5","Y Garn",53.115682,-4.0472076,2.7,4.49916060436486);
-cps[5] = new CPData("CP6","Glyder Fawr",53.101426,-4.0292022,1.3,4.93564633463906);
-cps[6] = new CPData("CP7","Glyder Fach",53.105022,-4.0080085,1.1,5.30498041410185);
-cps[7] = new CPData("CP8","Tryfan",53.11482,-3.9974076,1,5.64073866815893);
-cps[8] = new CPData("CP9","Pen yr Ole Wen",53.137519,-4.0108698,3.2,6.71516508114158);
-cps[9] = new CPData("CP10","Carmedd Dafydd",53.147685,-3.9998302,0.949999999999999,7.0341354224958);
-cps[10] = new CPData("CP11","Yr Elen",53.166446,-3.985443,2.45,7.85674314493565);
-cps[11] = new CPData("CP12","Carnedd Llewelyn",53.160044,-3.9703388,0.900000000000002,8.15892557358702);
-cps[12] = new CPData("CP13","Foel Grach",53.17373,-3.9636342,1.1,8.5282596530498);
-cps[13] = new CPData("CP14","Carnedd Uchaf",53.183225,-3.9657144,0.700000000000003,8.76329043088976);
-cps[14] = new CPData("CP15","Foel-fras",53.194589,-3.9526115,1,9.09904868494684);
-cps[15] = new CPData("CP16","Drum",53.207542,-3.9356802,1.2,9.50195858981533);
-cps[16] = new CPData("CP17","Drosgl",53.220872,-3.9397266,1.2,9.90486849468383);
-cps[17] = new CPData("CP18","Finish",53.268259,-3.9391725,6.24,12);
+/** Scottish4000s **/
+cps[0] = new CPData("P1","Ben Nevis",56.7969510331749,-5.00342999584972,7000.0,1.75);
+cps[1] = new CPData("P2","Carn Mor Dearg",56.8051409907639,-4.98670600354671,2050.0,2.2625);
+cps[2] = new CPData("P3","Aonach Mor",56.8129820097237,-4.96159398928284,2550.0,2.9);
+cps[3] = new CPData("B1","Stob Coire Bealach",56.7949269711971,-4.94554499164223,2800.0,3.6);
+cps[4] = new CPData("CP1","Corrour Station",56.760337036103,-4.69058501534164,20400.0,8.7);
+cps[5] = new CPData("CP2","Dalwhinnie",56.92905401811,-4.24172898754477,36600.0,17.85);
+cps[6] = new CPData("CP3","Glen Feshy Bothy",57.0118900202214,-3.90029702335596,30600,25.5);
+cps[7] = new CPData("P4","Cairn Toul",57.0543310325592,-3.71081697754561,15000,29.25);
+cps[8] = new CPData("P5","Sgor an Lochain Uaine",57.0583840180188,-3.72569099999964,1000.0,29.5);
+cps[9] = new CPData("P6","Carn na Criche",57.0626830123364,-3.75127097591757,2000.0,30);
+cps[10] = new CPData("P7","Braeriach",57.0782020222395,-3.72879699803888,2000.0,30.5);
+cps[11] = new CPData("P8","Ben Macdui",57.0702559780329,-3.6690429970622,5000.0,31.75);
+cps[12] = new CPData("P9","Cairn Gorm",57.1166840102523,-3.64492298103869,6000.0,33.25);
+cps[13] = new CPData("F","Cairn Gorm Lodge",57.16438,-3.6755831,7000.0,35);
 
 	}
 	
